@@ -1,6 +1,13 @@
 import React, { FC } from "react";
 import { Data, Heads, List } from "./pages/List";
 
+export const sampleHeads: Heads = [
+  { key: "name", label: "Dessert (100g serving)" },
+  { key: "calories", label: "Calories" },
+  { key: "fat", label: "Fat (g)" },
+  { key: "carbs", label: "Carbs (g)" },
+  { key: "protein", label: "Protein (g)" },
+];
 interface DatE extends Data {
   calories: number;
   carbs: number;
@@ -8,14 +15,6 @@ interface DatE extends Data {
   name: string;
   protein: number;
 }
-
-export const headCells: Heads = [
-  { id: "name", label: "Dessert (100g serving)", primary: true },
-  { id: "calories", label: "Calories" },
-  { id: "fat", label: "Fat (g)" },
-  { id: "carbs", label: "Carbs (g)" },
-  { id: "protein", label: "Protein (g)" },
-];
 
 function createData(
   name: string,
@@ -28,7 +27,7 @@ function createData(
 }
 
 const SampleList: FC = () => {
-  const rows: Data[] = [
+  const rows: DatE[] = [
     createData("Cupcake", 305, 3.7, 67, 4.3),
     createData("Donut", 452, 25.0, 51, 4.9),
     createData("Eclair", 262, 16.0, 24, 6.0),
@@ -43,8 +42,7 @@ const SampleList: FC = () => {
     createData("Nougat", 360, 19.0, 9, 37.0),
     createData("Oreo", 437, 18.0, 63, 4.0),
   ];
-  // return <div />;
-  return <List rows={rows} heads={headCells} />;
+  return <List rows={rows} heads={sampleHeads} />;
 };
 
 export { SampleList };

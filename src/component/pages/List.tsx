@@ -16,14 +16,13 @@ import { Order, stableSort } from "../../util";
 export type Data = {
   [key: string]: number | string | boolean;
 };
-type Key = string & keyof Data;
-type Head = { id: Key; label: string };
-type PHead = { id: Key; label: string; primary: true };
-export type Heads = [PHead, ...Head[]];
+type Key = keyof Data & string;
+type Head = { key: Key; label: string };
+export type Heads = Head[];
 
 interface Prop {
-  rows: Data[];
   heads: Heads;
+  rows: Data[];
 }
 
 const List: FC<Prop> = ({ rows, heads }) => {
@@ -41,13 +40,13 @@ const List: FC<Prop> = ({ rows, heads }) => {
         <TableRow>
           {heads.map((head) => (
             <TableCell
-              key={head.id}
-              sortDirection={orderBy === head.id ? order : false}
+              key={head.key}
+              sortDirection={orderBy === head.key ? order : false}
             >
               <TableSortLabel
-                active={orderBy === head.id}
-                direction={orderBy === head.id ? order : "asc"}
-                onClick={() => onRequestSort(head.id)}
+                active={orderBy === head.key}
+                direction={orderBy === head.key ? order : "asc"}
+                onClick={() => onRequestSort(head.key)}
               >
                 {head.label}
               </TableSortLabel>
@@ -59,7 +58,7 @@ const List: FC<Prop> = ({ rows, heads }) => {
   };
 
   const [order, setOrder] = React.useState<Order>("asc");
-  const [orderBy, setOrderBy] = React.useState<Key>(`${heads[0].id}`);
+  const [orderBy, setOrderBy] = React.useState<Key>(heads[0].key);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -103,18 +102,19 @@ const List: FC<Prop> = ({ rows, heads }) => {
             <TableBody>
               {stableSort(rows, order, orderBy)
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const labelId = `enhanced-table-checkbox-${index}`;
-
+                .map((row, _index) => {
                   return (
-                    <TableRow hover key={`${row.name}`}>
-                      <TableCell component="th" id={labelId} scope="row">
-                        {row.name}
-                      </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
+                    <TableRow hover key={`${row[heads[0].key]}`}>
+                      {heads.map((head, index) => {
+                        if (index === 0) {
+                          return (
+                            <TableCell component="th">
+                              {row[head.key]}
+                            </TableCell>
+                          );
+                        }
+                        return <TableCell>{row[head.key]}</TableCell>;
+                      })}
                     </TableRow>
                   );
                 })}
