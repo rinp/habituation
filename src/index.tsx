@@ -1,12 +1,30 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import {
+  CssBaseline,
+  MuiThemeProvider,
+  createMuiTheme,
+} from "@material-ui/core";
 import { App } from "./App";
 import * as serviceWorker from "./serviceWorker";
 
+export const theme = createMuiTheme({
+  props: {
+    MuiTextField: {
+      variant: "outlined",
+    },
+    MuiSelect: {
+      variant: "outlined",
+    },
+  },
+});
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </MuiThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
