@@ -1,25 +1,26 @@
 import React, { FC } from "react";
 import { Checkbox, FormControlLabel } from "@material-ui/core";
+import { hours, Hour } from "../../values/hour";
 
 type Props = {
-  values: number[];
+  values: Hour[];
   onChange: (eventOrPath: string | React.ChangeEvent<unknown>) => void;
 };
 const DaySelects: FC<Props> = ({ values, onChange }) => {
   return (
     <>
-      {Array.from(Array(24).keys()).map((i) => (
+      {hours.map((h) => (
         <FormControlLabel
-          key={`day${i}`}
+          key={h}
           control={
             <Checkbox
-              checked={values.includes(i)}
+              checked={values.includes(h)}
               onChange={onChange}
               name="frequencyDetail"
-              value={i}
+              value={h}
             />
           }
-          label={`${i}時${values} ${values.includes(i)} `}
+          label={h}
         />
       ))}
     </>

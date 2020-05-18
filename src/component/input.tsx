@@ -15,6 +15,7 @@ import { DaySelects } from "./organisms/daySelects";
 import { DayOfWeek } from "../values/dayOfWeek";
 import { Week } from "../values/week";
 import { MonthSelects } from "./organisms/monthSelects";
+import { Hour } from "../values/hour";
 
 const boxCss = {
   borderColor: "grey.A200",
@@ -29,7 +30,7 @@ type Value = {
 } & (
   | {
       frequency: "day";
-      frequencyDetail: number[];
+      frequencyDetail: Hour[];
     }
   | {
       frequency: "week";
@@ -57,6 +58,12 @@ const AddPage: FC = () => {
       //
     },
   });
+  const changeFrequency = (
+    event: React.ChangeEvent<{ name?: string; value: unknown }>
+  ) => {
+    formik.setFieldValue("frequencyDetail", [], false);
+    formik.handleChange(event);
+  };
   return (
     <>
       <form onSubmit={formik.handleSubmit}>
@@ -80,7 +87,7 @@ const AddPage: FC = () => {
               </FormLabel>
               <Select
                 value={formik.values.frequency}
-                onChange={formik.handleChange}
+                onChange={changeFrequency}
                 id="frequency"
                 // fullWidth
                 native

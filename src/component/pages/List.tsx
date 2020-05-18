@@ -13,12 +13,12 @@ import {
 } from "@material-ui/core";
 import { Order, stableSort } from "../../util";
 
+type Key = string;
+type Head = { key: Key; label: string };
+export type Heads = Head[];
 export type Data = {
   [key: string]: number | string | boolean;
 };
-type Key = keyof Data & string;
-type Head = { key: Key; label: string };
-export type Heads = Head[];
 
 interface Prop {
   heads: Heads;
