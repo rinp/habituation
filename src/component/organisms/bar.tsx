@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
 import { Menu as MenuIcon } from "@material-ui/icons";
+import "../../utility/message";
 
 const HeadBar = () => {
   return (

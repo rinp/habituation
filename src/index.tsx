@@ -5,6 +5,7 @@ import {
   MuiThemeProvider,
   createMuiTheme,
 } from "@material-ui/core";
+import { RecoilRoot } from "recoil";
 import { App } from "./App";
 import * as serviceWorker from "./serviceWorker";
 
@@ -16,6 +17,10 @@ export const theme = createMuiTheme({
     MuiSelect: {
       variant: "outlined",
     },
+    MuiButton: {
+      variant: "outlined",
+      size: "large",
+    },
   },
 });
 
@@ -23,7 +28,9 @@ ReactDOM.render(
   <React.StrictMode>
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
-      <App />
+      <RecoilRoot>
+        <App />
+      </RecoilRoot>
     </MuiThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")

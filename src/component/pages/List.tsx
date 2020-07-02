@@ -14,8 +14,8 @@ import {
 import { Order, stableSort } from "../../util";
 
 type Key = string;
-type Head = { key: Key; label: string };
-export type Heads = Head[];
+type Head = { readonly key: Key; readonly label: string };
+export type Heads = Readonly<Head[]>;
 export type Data = {
   [key: string]: number | string | boolean;
 };

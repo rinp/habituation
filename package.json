@@ -14,10 +14,17 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@types/react-router-dom": "^5.1.4",
+    "@types/yup": "^0.29.0",
+    "@typescript-eslint/parser": "^3.3.0",
     "clsx": "^1.1.0",
     "date-fns": "^2.13.0",
     "eslint": "^6.8.0",
+    "eslint-config-airbnb-typescript": "^8.0.2",
     "eslint-config-airbnb-typescript-prettier": "^2.1.1",
+    "eslint-config-react-app": "^5.2.1",
+    "firebase": "^7.15.0",
+    "firebase-admin": "^8.12.1",
+    "firebase-functions": "^3.7.0",
     "formik": "^2.1.4",
     "husky": "^4.2.3",
     "lint-staged": "^10.1.1",
@@ -26,14 +33,28 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
-    "typescript": "~3.7.2",
+    "recoil": "^0.0.10",
+    "typescript": "~3.8.0",
     "yup": "^0.28.5"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "r_start": "react-scripts start",
+    "r_build": "react-scripts build",
+    "r_test": "react-scripts test",
+    "r_eject": "react-scripts eject",
+    "f_lint": "eslint -c .functions_eslintrc.yml src/functions/**",
+    "f_build": "tsc -b functions_tsconfig.json",
+    "f_serve": "npm run build && firebase emulators:start --only functions",
+    "f_shell": "npm run build && firebase functions:shell",
+    "f_start": "npm run shell",
+    "f_deploy": "firebase deploy --only functions",
+    "f_logs": "firebase functions:log",
+    "build": "yarn r_build && yarn f_build"
+  },
+  "main": "lib/index.js",
+  "engines": {
+    "node": "10",
+    "yarn": "*"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
