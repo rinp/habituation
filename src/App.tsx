@@ -2,16 +2,22 @@ import React, { useEffect } from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import { Grid, useTheme, Box } from "@material-ui/core";
 import { useRecoilState } from "recoil";
+// import { useTranslation } from "react-i18next";
 import { Login } from "./Login";
 import { SampleList } from "./component/sample";
 import { HeadBar } from "./component/organisms/bar";
 import { AddPage } from "./component/input";
 import { firestore } from "./firebase";
+// import { Habituation, habituationsState, langState } from "./data";
 import { Habituation, habituationsState } from "./data";
 
 const App = () => {
   const theme = useTheme();
   const [habituations, setHabituations] = useRecoilState(habituationsState);
+
+  // const [_, i18n] = useTranslation();
+  // const [lang, setLang] = useRecoilState(langState);
+
   useEffect(
     () => {
       firestore.collection("habituations").onSnapshot((snapshot) => {

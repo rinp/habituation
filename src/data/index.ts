@@ -45,3 +45,9 @@ export const habituationsState = atom<Habituation[]>({
   key: "habituations",
   default: [],
 });
+
+type Language = "ja" | "en";
+export const langState = atom<Language>({
+  key: "lang",
+  default: "ja",
+});

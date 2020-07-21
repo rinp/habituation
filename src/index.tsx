@@ -8,6 +8,7 @@ import {
 import { RecoilRoot } from "recoil";
 import { App } from "./App";
 import * as serviceWorker from "./serviceWorker";
+import "./i18n";
 
 export const theme = createMuiTheme({
   props: {
