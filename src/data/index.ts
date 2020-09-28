@@ -51,3 +51,6 @@ export const langState = atom<Language>({
   key: "lang",
   default: "ja",
 });
+
+// export const user = atom<firebase.User
+// });

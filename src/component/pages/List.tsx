@@ -11,6 +11,7 @@ import {
   TablePagination,
   TableFooter,
 } from "@material-ui/core";
+import { useTranslation } from "react-i18next";
 import { Order, stableSort } from "../../util";
 
 type Key = string;
@@ -26,6 +27,8 @@ interface Prop {
 }
 
 const List: FC<Prop> = ({ rows, heads }) => {
+  const { t } = useTranslation();
+
   interface EnhancedTableProps {
     onRequestSort: (property: Key) => void;
     order: Order;
@@ -48,7 +51,7 @@ const List: FC<Prop> = ({ rows, heads }) => {
                 direction={orderBy === head.key ? order : "asc"}
                 onClick={() => onRequestSort(head.key)}
               >
-                {head.label}
+                {t(head.key)}
               </TableSortLabel>
             </TableCell>
           ))}

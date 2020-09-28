@@ -16,7 +16,7 @@ import { useTranslation } from "react-i18next";
 
 const HeadBar = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [t, i18n] = useTranslation();
+  const { i18n } = useTranslation();
   const changeLang: ChangeEventHandler<{ value: unknown }> = (e) => {
     i18n.changeLanguage(e.target.value as string);
   };

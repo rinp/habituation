@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { useRecoilValue } from "recoil";
+import { useTranslation } from "react-i18next";
 import { Heads, List, Data } from "./pages/List";
 import { habituationsState, Habituation } from "../data";
 // import { firestore } from "../firebase";
@@ -11,12 +12,6 @@ export const heads: Heads = [
   { key: "results", label: "実績" },
 ] as const;
 
-function toListProps(habituation: Habituation): Data {
-  const { label, frequency } = habituation;
-  const frequencyDetail = habituation.frequencyDetail.join(",");
-  return { label, frequency, frequencyDetail };
-}
-
 // interface DatE extends Data {
 //   calories: number;
 //   carbs: number;
@@ -26,7 +21,16 @@ function toListProps(habituation: Habituation): Data {
 // }
 
 const SampleList: FC = () => {
+  const { t } = useTranslation();
   const habituations: Habituation[] = useRecoilValue(habituationsState);
+
+  function toListProps(habituation: Habituation): Data {
+    const { label } = habituation;
+    const frequency = t(habituation.frequency);
+    const frequencyDetail = t(habituation.frequencyDetail.join(","));
+    return { label, frequency, frequencyDetail };
+  }
+
   const list = habituations.map(toListProps);
   return <List rows={list} heads={heads} />;
 };
